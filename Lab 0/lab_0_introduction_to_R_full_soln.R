@@ -10,6 +10,7 @@ gc()
 
 # libraries, source files and data ---------------
 
+install.packages('tidyverse')
 library(tidyverse)
 
 # basics of r -------------------------------------------------------------
@@ -88,7 +89,7 @@ flights <- read_csv('./data/flights.csv')
 
 # have a peek at the first 6 rows of the flight data
 
-flights %>% head
+flights %>% head()
 
 # use filter find all data in Nov, Dec, Jan
 filter(flights, month %in% c(12, 11, 1))
