@@ -97,12 +97,6 @@ filter(flights, month %in% c(12, 11, 1))
 # rearrange the rows in decreasing order
 flights %>% arrange(desc(dep_delay))
 
-# pull all cols between year and day
-flights %>% select(year:day)
-
-# create new vars using mutate
-flights_sml <- select(flights, year:day, ends_with("delay"), 
-                      distance, air_time)
 mutate(flights_sml,
        gain = dep_delay - arr_delay, # add variable for how late the flight was
        hours = air_time / 60, # what was the air time in hours? 
@@ -136,6 +130,35 @@ p + geom_smooth()
 # other types of plot (boxplots)
 ggplot(data = mpg) + 
   geom_boxplot(mapping = aes(x = class, y = hwy, fill = class))
+
+
+
+# starwars dataset example  -------------------------------------------------------------------------
+
+# this is another example taken from: https://www.youtube.com/watch?v=nRtp7wSEtJA
+# open the video and follow along
+
+view(starwars)
+
+starwars %>% 
+  select(gender, mass, height, species) %>% # what var are we interested in?
+  filter(species == 'Human') %>% # select humans
+  na.omit() %>% # remove NA values
+  mutate(
+    height = height/100, # convert height from cm to meters
+    BMI = mass/height^2 # calculate BMI 
+    ) %>% 
+  group_by(gender) %>% 
+  summarise(
+    average_BMI = mean(BMI)
+  )
+
+
+
+
+
+
+
 
 
 
