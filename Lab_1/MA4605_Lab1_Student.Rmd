@@ -1,0 +1,65 @@
+---
+title: "MA4605 Lab 1 Report"
+author: "Name & ID Number"
+date: "Date of lab session"
+output: 
+  pdf_document
+---
+
+ <!-- DO NOT ALTER THE CODE IN THIS CHUNK -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(MASS)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+# install.packages(kableExtra)
+library(kableExtra)
+```
+
+* * * 
+## Lab report
+
+#### Exercise 1: 
+
+```{r}
+# enter your code for Exercise 1 here
+## we can use the $ sign with the col name to get the first var
+whiteside$Insul
+```
+
+We have information about when insulation was put in and the temperate and gass usages before and after.
+
+```{r, echo = TRUE}
+
+```
+
+We can see from the above plot that as temperature decreases the gass usage increases. 
+
+#### Exercise 2:
+
+We can also note that gass usage **dropped** the insulation was installed in the house.
+
+
+```{r}
+
+```
+
+#### Exercise 3:
+
+```{r}
+# enter your code for Exercise 3 here
+
+
+```
+
+
+#### Exercise 4:
+
+We can see from the following summary measure that the mean amount of gas used is less after insulation was installed. 
+
+```{r}
+# enter your code for Exercise 4 here
+
+```
+
