@@ -1,0 +1,151 @@
+---
+title: "MA4605: Lab 2 Report"
+author: "Name & ID Number"
+date: "Date of lab session"
+output: 
+  html_document: 
+    highlight: pygments
+    theme: spacelab
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+library(tidyverse)
+library(kableExtra)
+```
+
+* * * 
+
+First read in the data:
+
+```{r}
+dat = read.csv(file="ExampleData.csv")
+```
+
+
+## Recoding variables  
+
+The ```Stats.ability``` and ```Stats.interest``` variables are recorded as numbers which represent each category of the Likert scales. We need to recode these variables from numbers to category labels. Let's start with the ```Stats.ability``` variable. The ```recode_factor``` command creates a labelled factor from the corresponding numbers. 
+
+```{r}
+
+dat$Stats.ability = recode_factor(dat$Stats.ability, `1` = "very poor", `2` = "poor", `3` = "good", `4` = "very good", `5` = "excellent")
+
+```  
+
+#### Exercise 1: 
+
+```{r}
+# Write your R code for Exercise 1 here.
+
+
+```
+
+## Summarise and plot categorial variables
+
+### Create a frequency distribution
+
+To create a frequency distribution for the ```Stats.ability``` variable use the following command
+```{r}
+
+dat %>%
+  count(Stats.ability) %>%
+  mutate(prop = prop.table(n), pct = prop.table(n)*100) %>%
+  kable() %>% # This line of code makes the table look nicer
+  kable_styling() # This line of code makes the table look nicer
+
+```
+
+
+#### Exercise 2: 
+Create a frequency distribution for the ```Stats.interest``` variable and comment.   
+
+```{r}
+# Write your R code for Exercise 2 here.
+
+
+```
+
+[Write your comment for Exercise 2 here.]
+
+
+### Create a barchart
+
+Create a barchart plotting the frequencies on the y-axis:
+
+```{r, fig.height=4, fig.width=4}
+  ggplot(aes(x=Stats.ability), data=dat) + geom_bar(fill="#880011") + xlab("Statistics ability rating")
+
+``` 
+
+Create a barchart with the relative frequencies on the y-axis: 
+
+```{r, fig.height=4, fig.width=4}
+
+dat %>%
+  count(Stats.ability) %>%
+  mutate(prop = prop.table(n)) %>%
+  ggplot(aes(x=Stats.ability, y=prop)) + geom_bar(stat="identity", fill="#880011") + 
+  xlab("Statistics ability rating")
+
+```
+
+#### Exercise 3: 
+Create a barchart for the ```Stats.interest``` variable. You can choose whether to plot the frequency or relative frequency on the y-axis. Play around with the colour of the bars. 
+
+```{r, fig.height=4, fig.width=4}
+# Write your R code for Exercise 3 here.
+
+
+```
+
+
+## Summarise and plot numeric variables
+
+### Create summary statistics
+
+To create summary statistics for the variable ```LC.points``` use the following code:
+
+```{r}
+dat %>%
+  summarise(min = min(LC.points,na.rm=TRUE), max = max(LC.points,na.rm=TRUE),
+            mean = mean(LC.points,na.rm=TRUE), med = median(LC.points,na.rm=TRUE),
+            sd = sd(LC.points,na.rm=TRUE), 
+            q1 = quantile(LC.points, probs = 0.25,na.rm=TRUE),
+            q3 = quantile(LC.points, probs = 0.75,na.rm=TRUE), IQR = IQR(LC.points,na.rm=TRUE)) %>%
+  kable() %>% # This line of code makes the table look nicer
+  kable_styling() # This line of code makes the table look nicer
+
+```
+
+### Create a histogram and boxplot
+
+The two plots that are appropriate for numeric variables are a histogram and boxplot. 
+
+To create a histogram with 7 bins:
+
+```{r, fig.height=4, fig.width=4}
+
+ggplot(aes(x=LC.points), data=dat) + geom_histogram(bins=7)
+
+```
+
+To create a boxplot:
+
+```{r, fig.height=4, fig.width=4}
+
+ggplot(aes(y=LC.points), data=dat) + geom_boxplot()
+
+```
+
+#### Exercise 4: 
+Create a summary statistics, a histogram and a boxplot for the ```Num.times.exercise``` variable and comment on the results. 
+
+```{r}
+# Write your R code for Exercise 4 here.
+
+
+```
+
+[Write your comment for Exercise 4 here.]
