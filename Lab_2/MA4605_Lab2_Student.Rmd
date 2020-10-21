@@ -20,7 +20,7 @@ library(kableExtra)
 First read in the data:
 
 ```{r}
-dat = read.csv(file="ExampleData.csv")
+dat = read.csv(file="../data/ExampleData.csv")
 ```
 
 
